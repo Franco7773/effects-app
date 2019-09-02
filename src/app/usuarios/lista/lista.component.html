@@ -1,10 +1,34 @@
-<div class="card-group">
-  <div class="card" *ngFor="let user of users" >
-    <img [src]="user.avatar" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
-      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-      <p class="card-text"><small class="text-muted">ID: {{ user.id }}</small></p>
+<ng-container *ngIf="loading; else Loaded">
+  <div class="row">
+    <div class="col">
+      <div class="alert alert-info text-center">
+        <i class="fa fa-sync fa-spin fa-2x"></i>
+        <h1>Espere...</h1>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<div class="row" *ngIf="error">
+  <div class="col">
+    <div class="alert alert-danger text-center">
+      <i class="fa fa-times fa-2x"></i>
+      <h2>Error: {{ error.status }}</h2>
+      <p>{{ error.message }}</p><br><br>
+      {{ error.url }}
     </div>
   </div>
 </div>
+
+<ng-template #Loaded>
+  <div class="card-group">
+    <div class="card" *ngFor="let user of users" >
+      <img [src]="user.avatar" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
+        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
+        <p class="card-text"><small class="text-muted">ID: {{ user.id }}</small></p>
+      </div>
+    </div>
+  </div>
+</ng-template>

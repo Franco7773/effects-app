@@ -12,9 +12,16 @@ export class UsuarioService {
 
   constructor( private http: HttpClient ) { }
 
-  getUsers( termino: string ) {
+  getUsers() {
 
-    const url: string = `${ this.URL_BASE }/users?per_page=7${ termino }`;
+    const url: string = `${ this.URL_BASE }/users?per_page=7`;
+
+    return this.http.get( url ).pipe( map( (resp: any) => resp.data ));
+  }
+
+  getUserById( id: string ) {
+
+    const url: string = `${ this.URL_BASE }/users/${ id }`;
 
     return this.http.get( url ).pipe( map( (resp: any) => resp.data ));
   }
